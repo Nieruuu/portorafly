@@ -1,4 +1,4 @@
-import { siLaravel, siReact, siTailwindcss, siDocker, siPython, siMysql, siOpenlayers, siPhp, siJavascript, siTypescript, siHtml5, siCss, siCodeigniter, siLivewire, siGit, siGithubactions, siLinux } from 'simple-icons';
+import { siLaravel, siReact, siTailwindcss, siDocker, siPython, siMysql, siOpenlayers, siPostman, siPhp, siJavascript, siTypescript, siHtml5, siCss, siCodeigniter, siLivewire, siGit, siGithubactions, siLinux } from 'simple-icons';
 
 export interface Skill {
   id: string; name: string; group: 'Frontend' | 'Backend & data' | 'DevOps & tools';
@@ -13,7 +13,8 @@ export const skills: Skill[] = [
   { id: 'docker', name: 'Docker', group: 'DevOps & tools', color: '#8AAEF0', path: siDocker.path, featured: true },
   { id: 'python', name: 'Python', group: 'DevOps & tools', color: '#F1D884', path: siPython.path, featured: true },
   { id: 'mysql', name: 'MySQL', group: 'Backend & data', color: '#D9D5EB', path: siMysql.path, featured: true },
-  { id: 'openlayers', name: 'OpenLayers', group: 'Frontend', color: '#D8EE91', path: siOpenlayers.path, featured: true },
+  { id: 'postman', name: 'Postman', group: 'DevOps & tools', color: '#F6B58D', path: siPostman.path, featured: true },
+  { id: 'openlayers', name: 'OpenLayers', group: 'Frontend', color: '#D8EE91', path: siOpenlayers.path },
   { id: 'php', name: 'PHP', group: 'Backend & data', color: '#D9D5EB', path: siPhp.path },
   { id: 'javascript', name: 'JavaScript', group: 'Frontend', color: '#F1D884', path: siJavascript.path },
   { id: 'typescript', name: 'TypeScript', group: 'Frontend', color: '#A8D9EB', path: siTypescript.path },

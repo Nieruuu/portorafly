@@ -16,7 +16,7 @@ export function AboutSection() {
       </div>
       <div className="profile-story"><p className="profile-lead">{site.about}</p><p>{site.approach}</p>
         <div className="profile-experience-heading"><h3>Tempat saya bertumbuh.</h3><span aria-hidden="true">↙</span></div>
-        <div className="profile-timeline">{experiences.map(exp => <article key={exp.company}>
+        <div className="profile-timeline">{experiences.map(exp => <article key={`${exp.company}-${exp.role}-${exp.period}`}>
           <span className="profile-timeline-dot" aria-hidden="true" /><p className="profile-period">{exp.period}</p><div className="profile-experience-card"><h4>{exp.role}</h4><p className="profile-company">{exp.company}</p><p>{exp.description}</p></div>
         </article>)}</div>
       </div>
