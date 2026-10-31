@@ -38,12 +38,12 @@ Untuk menambah badge, impor logo dari Simple Icons, tambahkan skill dengan `path
 
 ## Interaksi dan aksesibilitas
 
-Revisi dynamic scroll: hero dengan perubahan susunan badge, galeri project horizontal yang dipin di desktop, dan kartu bertumpuk di mobile. Tombol **Gerakan aktif / Tampilan tenang** mengatur gerakan besar secara global. Detail perilaku serta breakpoint ada di `docs/DYNAMIC-SCROLL.md`.
+Revisi dynamic scroll: hero dengan perubahan susunan badge, galeri project horizontal yang dipin di desktop, dan kartu bertumpuk di mobile. Sejak revisi 31 Oktober 2026, badge juga melayang dan berputar halus saat halaman diam, tanpa tombol jeda. Preferensi reduced-motion dari sistem tetap diikuti. Detail perilaku serta breakpoint ada di `docs/DYNAMIC-SCROLL.md`.
 
-- Scene 3D dimuat terpisah dan dirender on demand. Perubahan mengikuti scroll dan gerakan pointer, tanpa loop animasi tanpa henti.
-- Badge statis dipakai untuk layar 600px ke bawah, reduced-motion, browser tanpa WebGL2, kegagalan scene, dan saat 3D dijeda.
+- Scene 3D dimuat terpisah. Frame idle diminta sekitar 30 kali/detik untuk gerakan otomatis; saat scroll, GSAP juga dapat meminta frame untuk menjaga respons.
+- Layar 600px ke bawah dan browser tanpa WebGL2 memakai badge CSS dengan gerakan ringan. Reduced-motion memakai tampilan statis.
 - Scene dilepas saat keluar viewport. DPR dibatasi 1–1.5, geometri sederhana, tanpa model GLTF atau tekstur jarak jauh.
-- GSAP mengikuti `prefers-reduced-motion` dan membersihkan ScrollTrigger saat unmount/pergantian preferensi. Mode tenang menonaktifkan pin, scrub, sticky stack, dan WebGL.
+- GSAP mengikuti `prefers-reduced-motion` dan membersihkan ScrollTrigger saat unmount/pergantian preferensi. Preferensi ini menonaktifkan pin, scrub, sticky stack, dan WebGL. Pengaturan gerakan lokal dari versi lama tidak lagi digunakan.
 - Native dialog mendukung Escape, focus containment, dan kembali ke pemicu. Menu mobile memiliki expanded state dan Escape.
 - Font disajikan secara lokal. Screenshot dioptimalkan menjadi WebP dengan script `node scripts/optimize-images.mjs`.
 
@@ -53,5 +53,6 @@ Revisi dynamic scroll: hero dengan perubahan susunan badge, galeri project horiz
 - `docs/DESIGN.md`: sitemap, wireframe, token, serta perilaku motion.
 - `docs/VALIDATION.md`: hasil pemeriksaan serta batas verifikasi.
 - `docs/DYNAMIC-SCROLL.md`: perilaku scroll baru dan file yang mengaturnya.
+- `docs/REFINEMENT-2026-10-31.md`: animasi idle serta pembaruan skills, about, dan contact.
 
 `js/main.js` dan `src/input.css` lama disimpan sebagai referensi migrasi dan tidak dipakai oleh aplikasi baru. Task Management dari data lama tidak ditampilkan karena screenshot tidak tersedia dan link repo menggunakan pemilik berbeda; perlu konfirmasi sebelum ditambahkan kembali.

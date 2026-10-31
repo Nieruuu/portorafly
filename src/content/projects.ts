@@ -14,7 +14,7 @@ export const projects: Project[] = [
   {
     id: 'revishit', title: 'Revishit', category: 'Web application', color: '#D8EE91',
     description: 'Website layanan pendidikan dengan area member dan admin: dari pendaftaran dan pembayaran hingga pengiriman dan review dokumen.',
-    skills: ['laravel', 'react', 'typescript', 'tailwind'], tags: ['Inertia'], visibility: 'public',
+    skills: ['laravel', 'react', 'typescript', 'tailwind'], tags: ['Inertia'], visibility: 'public', live: 'https://revishit.com',
     details: [
       'Area member untuk membership, pembayaran, jadwal, serta pengiriman dokumen.',
       'Alur review menyimpan catatan admin dan konfirmasi revisi peserta. Dokumen Google Docs tetap menggunakan link yang sama.',

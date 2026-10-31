@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { RoundedBox } from '@react-three/drei';
 import { ExtrudeGeometry, OrthographicCamera, type Group } from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
@@ -7,6 +7,26 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { skills, type Skill } from '../content/skills';
 gsap.registerPlugin(ScrollTrigger);
+
+function IdleFrames() {
+  const invalidate = useThree(state => state.invalidate);
+  useEffect(() => {
+    let frame = 0;
+    let lastFrame = 0;
+    const tick = (now: number) => {
+      if (now - lastFrame >= 1000 / 30) { lastFrame = now; invalidate(); }
+      frame = requestAnimationFrame(tick);
+    };
+    const visibility = () => {
+      cancelAnimationFrame(frame);
+      if (!document.hidden) { lastFrame = 0; frame = requestAnimationFrame(tick); }
+    };
+    visibility();
+    document.addEventListener('visibilitychange', visibility);
+    return () => { cancelAnimationFrame(frame); document.removeEventListener('visibilitychange', visibility); };
+  }, [invalidate]);
+  return null;
+}
 
 function ResponsiveCamera() {
   const { camera, size, invalidate } = useThree();
@@ -33,6 +53,20 @@ function ContextLossGuard({ onFailure }: { onFailure: () => void }) {
 }
 
 function ClayBadge({ skill, index, count }: { skill: Skill; index: number; count: number }) {
+  const floating = useRef<Group>(null);
+  const idleTime = useRef(0);
+  useFrame((_, delta) => {
+    const badge = floating.current;
+    if (!badge) return;
+    idleTime.current += Math.min(delta, 0.06);
+    const time = idleTime.current;
+    const phase = index * 1.37;
+    badge.position.y = Math.sin(time * 0.72 + phase) * 0.13;
+    badge.position.z = Math.cos(time * 0.46 + phase) * 0.07;
+    badge.rotation.x = Math.sin(time * 0.38 + phase) * 0.11;
+    badge.rotation.y = Math.sin(time * 0.43 + phase) * 0.32;
+    badge.rotation.z = Math.sin(time * 0.56 + phase) * 0.12;
+  });
   const geometries = useMemo(() => {
     const svg = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="${skill.path}" /></svg>`);
     return svg.paths.flatMap(path => SVGLoader.createShapes(path).map(shape => new ExtrudeGeometry(shape, { depth: 0.7, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.12, bevelThickness: 0.12, curveSegments: 8 })));
@@ -42,11 +76,13 @@ function ClayBadge({ skill, index, count }: { skill: Skill; index: number; count
   const x = Math.cos(angle) * 1.72;
   const y = Math.sin(angle) * 1.82 + 0.15;
   return <group position={[x, y, Math.sin(index * 2) * 0.3]} rotation={[0.12, (index % 2 ? -1 : 1) * 0.24, Math.sin(index * 3) * 0.15]}>
+    <group ref={floating}>
     <RoundedBox args={[1.28, 1.28, 0.43]} radius={0.23} smoothness={4}>
       <meshStandardMaterial color={skill.color} roughness={0.78} metalness={0} />
     </RoundedBox>
     <group position={[-0.43, 0.43, 0.24]} scale={[0.036, -0.036, 0.036]}>
       {geometries.map((geometry, i) => <mesh key={i} geometry={geometry}><meshStandardMaterial color="#303733" roughness={0.85} /></mesh>)}
+    </group>
     </group>
   </group>;
 }
@@ -108,6 +144,6 @@ export default function TechScene({ onFailure }: { onFailure: () => void }) {
     <ambientLight intensity={1.6} />
     <directionalLight position={[-3, 6, 6]} intensity={3.2} />
     <directionalLight position={[4, -1, 2]} intensity={0.65} color="#e7edff" />
-    <ContextLossGuard onFailure={onFailure} /><ResponsiveCamera /><Installation />
+    <ContextLossGuard onFailure={onFailure} /><ResponsiveCamera /><IdleFrames /><Installation />
   </Canvas>;
 }

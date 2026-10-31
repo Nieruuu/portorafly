@@ -1,5 +1,18 @@
 # Validasi — 30 Oktober 2026
 
+## Refinement 31 Oktober 2026
+
+- ESLint tanpa warning, TypeScript strict, dan build Vite produksi: lulus.
+- Hero idle: dua tangkapan layar pada scrollY=0 menunjukkan posisi/sudut badge yang berbeda tanpa interaksi scroll. Canvas aktif di hero dan dilepas setelah navigasi ke skills/contact.
+- Tombol Jeda 3D serta kontrol Gerakan aktif/Tampilan tenang tidak ditemukan dalam DOM.
+- Skills: 17 teknologi dari data; filter Frontend menampilkan tujuh teknologi. Memilih OpenLayers menghasilkan hanya Taxation Map sebagai project terkait; tombol membuka dialog yang sesuai dan Escape menutupnya.
+- About dan contact diperiksa secara visual: bio/pengalaman tetap terbaca, ilustrasi CSS terintegrasi, dan CTA email memakai alamat yang sama.
+- Lebar 1280, 768, dan 375: tidak ditemukan horizontal overflow. Pada mobile workbench menggunakan tiga kolom, dan contact/email tetap berada di dalam lebar halaman.
+- Console tidak memperlihatkan warning/error aplikasi saat pemeriksaan.
+- Ukuran build sekitar 395 KB JS utama (137 KB gzip), 927 KB scene lazy (256 KB gzip), dan 50 KB CSS (10 KB gzip). Peringatan chunk Three.js >500 KB tetap ada.
+
+Reduced-motion ditinjau pada jalur media query React/CSS/GSAP; preferensi OS tidak diubah. Perangkat fisik low-end, kegagalan GPU sesungguhnya, dan pengukuran daya belum diuji. Perkiraan 30fps mengacu scheduler idle; scroll/pointer dapat meminta frame tambahan.
+
 ## Revisi dynamic scroll
 
 - Lint tanpa warning, TypeScript strict, dan build produksi: lulus setelah perubahan.

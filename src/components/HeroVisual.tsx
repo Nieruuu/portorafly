@@ -10,18 +10,17 @@ class SceneBoundary extends Component<{ children: ReactNode; fallback: ReactNode
   render() { return this.state.failed ? this.props.fallback : this.props.children; }
 }
 
-function StaticBadges() {
+function StaticBadges({ motion = false }: { motion?: boolean }) {
   const featured = skills.filter(s => s.featured);
-  return <div className="static-badges" aria-hidden="true">{featured.map((skill, i) => {
+  return <div className={`static-badges${motion ? ' badges-drifting' : ''}`} aria-hidden="true">{featured.map((skill, i) => {
     const angle = i / featured.length * Math.PI * 2 + 0.2;
-    return <div className="clay-tile" key={skill.id} style={{ backgroundColor: skill.color, left: `${37 + Math.cos(angle) * 30}%`, top: `${38 - Math.sin(angle) * 30}%`, transform: `rotate(${Math.sin(i * 3) * 14}deg)` }}><SkillIcon skill={skill} /></div>;
+    return <div className="clay-tile-position" key={skill.id} style={{ left: `${37 + Math.cos(angle) * 30}%`, top: `${38 - Math.sin(angle) * 30}%`, transform: `rotate(${Math.sin(i * 3) * 14}deg)` }}><div className="clay-tile" style={{ backgroundColor: skill.color, animationDelay: `${i * -0.8}s` }}><SkillIcon skill={skill} /></div></div>;
   })}<div className="static-plinth" /></div>;
 }
 
 export function HeroVisual({ motion = true }: { motion?: boolean }) {
   const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
   const narrow = useMediaQuery('(max-width: 600px)');
-  const [paused, setPaused] = useState(false);
   const [failed, setFailed] = useState(false);
   const [visible, setVisible] = useState(false);
   const [supported, setSupported] = useState(false);
@@ -35,16 +34,15 @@ export function HeroVisual({ motion = true }: { motion?: boolean }) {
     if (host.current) observer.observe(host.current);
     return () => observer.disconnect();
   }, []);
-  const animated = motion && supported && !reduced && !paused && !failed && visible && !narrow;
+  const animated = motion && supported && !reduced && !failed && visible && !narrow;
+  const fallback = <StaticBadges motion={motion && !reduced && visible} />;
   return <div className="hero-art" ref={host}>
     <div className="art-caption"><span className="tiny-orbit" /> Tools of my trade</div>
     <div className="scene-shell" role="img" aria-label={`Komposisi badge clay: ${skills.filter(s => s.featured).map(s => s.name).join(', ')}`}>
-      <SceneBoundary fallback={<StaticBadges />}>
-        {animated ? <Suspense fallback={<StaticBadges />}><TechScene onFailure={() => setFailed(true)} /></Suspense> : <StaticBadges />}
+      <SceneBoundary fallback={fallback}>
+        {animated ? <Suspense fallback={fallback}><TechScene onFailure={() => setFailed(true)} /></Suspense> : fallback}
       </SceneBoundary>
     </div>
-    <div className="art-bottom"><span>Ide kecil. Banyak kemungkinan.</span>
-      {motion && supported && !reduced && !narrow && !failed && <button className="motion-button" aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? 'Aktifkan 3D' : 'Jeda 3D'}</button>}
-    </div>
+    <div className="art-bottom"><span>Ide kecil. Banyak kemungkinan.</span></div>
   </div>;
 }

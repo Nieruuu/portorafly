@@ -1,5 +1,7 @@
 # Dynamic scroll revision — 30 Oktober 2026
 
+Pembaruan 31 Oktober: kontrol jeda dihapus sesuai permintaan pengguna. Badge bergerak otomatis pada lapisan terpisah dari scroll; lihat `REFINEMENT-2026-10-31.md`.
+
 ## Arah interaksi
 
 Referensi https://www.hirotos.com/projects/ diperiksa langsung di browser. Halaman tersebut memakai looping gallery horizontal yang bergeser saat scroll. Portfolio ini memakai interpretasi sendiri: galeri berakhir setelah semua project, lalu pengunjung bisa meneruskan ke skills, pengalaman, dan kontak.
@@ -19,8 +21,7 @@ Tidak ada wheel interception, infinite-scroll trap, atau library smooth-scroll b
 
 - Layar <900px dengan tinggi ≥700px: kartu disusun vertikal dan menumpuk menggunakan CSS sticky. Kartu sebelumnya mengecil dan miring sedikit mengikuti scroll berikutnya.
 - Layar pendek/landscape: daftar statis tanpa pin atau sticky stack.
-- Reduced-motion OS atau tombol “Tampilan tenang”: daftar biasa, tanpa pin, scrub, stack, dan WebGL. Pilihan tombol disimpan secara lokal; jika storage tidak tersedia halaman tetap berfungsi.
-- Tombol “Gerakan aktif” mengembalikan perjalanan scroll. Saat berpindah mode di galeri, posisi project diusahakan tetap terlihat.
+- Reduced-motion OS: daftar biasa, tanpa pin, scrub, stack, dan WebGL. Kontrol jeda dan pengaturan lokal versi sebelumnya sudah dihapus.
 - Tab/Shift+Tab ke kartu di luar rail akan menggeser galeri ke project yang memperoleh fokus. Fokus dalam mobile stack menempatkan kartu di atas tumpukan.
 - Native dialog tetap mendukung Escape, focus containment, dan pengembalian fokus.
 - Semua isi project tetap berasal dari `src/content/projects.ts`; logo dan badges berasal dari `skills.ts`.
@@ -29,7 +30,7 @@ Tidak ada wheel interception, infinite-scroll trap, atau library smooth-scroll b
 
 - `src/components/ProjectGallery.tsx`: pengukuran rail, pin, scrub, kontrol, dan navigasi fokus.
 - `src/motion.css`: panggung horizontal, perspektif, mobile stack, dan fallback.
-- `src/App.tsx`: hero journey dan pilihan gerakan global.
+- `src/App.tsx`: hero journey dan preferensi reduced-motion dari sistem.
 - `src/components/TechScene.tsx`: perubahan susunan badge 3D.
 
 Referensi teknis: https://gsap.com/docs/v3/Plugins/ScrollTrigger/ dan https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/.

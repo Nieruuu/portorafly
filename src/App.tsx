@@ -4,12 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { site } from './content/site';
 import { type Project } from './content/projects';
 import { skills } from './content/skills';
-import { experiences } from './content/experiences';
-import { SkillIcon } from './components/SkillIcon';
 import { HeroVisual } from './components/HeroVisual';
 import { ProjectGallery } from './components/ProjectGallery';
 import { useMediaQuery } from './hooks/useMediaQuery';
+import { SkillsWorkbench } from './components/SkillsWorkbench';
+import { AboutSection, ContactSection } from './components/ProfileSections';
 import './motion.css';
+import './sections.css';
 gsap.registerPlugin(ScrollTrigger);
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -54,12 +55,8 @@ function ProjectDialog({ project, close }: { project: Project | null; close: () 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [skillGroup, setSkillGroup] = useState('Semua');
-  const [calm, setCalm] = useState(() => {
-    try { return localStorage.getItem('portfolio-calm') === 'true'; } catch { return false; }
-  });
   const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
-  const motion = !calm && !reduced;
+  const motion = !reduced;
   const root = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
     if (!motion) return;
@@ -67,6 +64,10 @@ export default function App() {
     media.add('(prefers-reduced-motion: no-preference)', () => {
       gsap.from('.hero-copy > *', { y: 18, opacity: 0, stagger: 0.09, duration: 0.7, ease: 'power2.out' });
       gsap.to('.scroll-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom bottom', scrub: true } });
+      gsap.from('.workbench', { y: 38, rotation: 1.5, duration: 0.9, ease: 'power2.out', scrollTrigger: { trigger: '#skills', start: 'top 72%', once: true } });
+      gsap.fromTo('.profile-monogram', { y: 22, rotation: -9 }, { y: -28, rotation: 3, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+      gsap.fromTo('.profile-sticker', { y: 15, rotation: 12 }, { y: -38, rotation: -4, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+      gsap.fromTo('.contact-envelope', { rotation: -10, y: 30 }, { rotation: 3, y: -12, ease: 'none', scrollTrigger: { trigger: '#contact', start: 'top bottom', end: 'bottom bottom', scrub: 0.8 } });
     });
     media.add('(min-width: 900px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)', () => {
       const hero = document.querySelector('#hero');
@@ -87,39 +88,20 @@ export default function App() {
     return () => { cancelAnimationFrame(refresh); media.revert(); };
   }, [motion]);
   useEffect(() => {
-    try { localStorage.setItem('portfolio-calm', String(calm)); } catch { /* Storage is optional. */ }
     document.documentElement.classList.toggle('calm-motion', !motion);
     return () => document.documentElement.classList.remove('calm-motion');
-  }, [calm, motion]);
+  }, [motion]);
   useEffect(() => {
     if (!menuOpen) return;
     const escape = (e: KeyboardEvent) => { if (e.key === 'Escape') { setMenuOpen(false); document.getElementById('menu-button')?.focus(); } };
     window.addEventListener('keydown', escape);
     return () => window.removeEventListener('keydown', escape);
   }, [menuOpen]);
-  const toggleMotion = () => {
-    const section = document.getElementById('projects');
-    const bounds = section?.getBoundingClientRect();
-    const inGallery = bounds && bounds.top < innerHeight / 2 && bounds.bottom > innerHeight / 2;
-    const cards = Array.from(section?.querySelectorAll<HTMLElement>('.gallery-card') ?? []);
-    const previousSelected = Array.from(section?.querySelectorAll('.gallery-dots button') ?? []).findIndex(button => button.getAttribute('aria-current') === 'true');
-    const previousBounds = cards[previousSelected]?.getBoundingClientRect();
-    const selected = calm && !(previousBounds && previousBounds.top < innerHeight && previousBounds.bottom > 88)
-      ? cards.reduce((closest, card, i) => Math.abs(card.getBoundingClientRect().top - innerHeight / 2) < Math.abs(cards[closest].getBoundingClientRect().top - innerHeight / 2) ? i : closest, 0)
-      : previousSelected;
-    setCalm(!calm);
-    // Re-pin/unpin first, then keep the same project in view as the layout changes.
-    if (inGallery && cards.length) requestAnimationFrame(() => requestAnimationFrame(() => {
-      if (!calm) cards[Math.max(0, selected)]?.scrollIntoView({ behavior: 'instant', block: 'center' });
-      else section?.querySelectorAll<HTMLButtonElement>('.gallery-dots button')[Math.max(0, selected)]?.click();
-    }));
-  };
   return <div ref={root} className={motion ? 'motion-on' : 'motion-off'}>
     <a className="skip-link" href="#main">Lewati ke konten</a><div className="scroll-progress" />
     <header className="site-header"><a className="wordmark" href="#hero" aria-label={`${site.name}, beranda`}>rafly<span className="wordmark-dot">.</span></a>
       <button id="menu-button" className="menu-button" aria-expanded={menuOpen} aria-controls="site-nav" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Tutup' : 'Menu'} <span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button>
       <nav id="site-nav" aria-label="Navigasi utama" className={menuOpen ? 'is-open' : ''}>{site.navigation.map(item => <a key={item.id} href={`#${item.id}`} onClick={() => setMenuOpen(false)}>{item.label}{item.id === 'contact' && <Arrow diagonal />}</a>)}</nav>
-      <button className="calm-toggle" aria-pressed={calm || reduced} disabled={reduced} onClick={toggleMotion}>{calm || reduced ? 'Tampilan tenang' : 'Gerakan aktif'}<span aria-hidden="true">{calm || reduced ? '○' : '◉'}</span></button>
     </header>
     <main id="main">
       <section className="hero wrap" id="hero">
@@ -132,16 +114,9 @@ export default function App() {
         <div className="hero-footer"><span>Web development / Geospatial / Automation</span><a href="#projects">Scroll untuk menjelajah <span aria-hidden="true">↓</span></a></div>
       </section>
       <ProjectGallery motion={motion} openProject={setSelectedProject} renderVisual={project => <ProjectVisual project={project} />} />
-      <section className="skills-section wrap" id="skills"><div className="section-heading"><div><p className="section-label">Di balik setiap project</p><h2>Tools yang saya gunakan.</h2></div><p>Dari tampilan depan sampai deployment.<br />Terus dipelajari, terus dikembangkan.</p></div>
-        <div className="skill-filters" role="group" aria-label="Filter kelompok teknologi">{['Semua', 'Frontend', 'Backend & data', 'DevOps & tools'].map(group => <button key={group} aria-pressed={skillGroup === group} onClick={() => setSkillGroup(group)}>{group}</button>)}</div>
-        <ul className="skill-grid">{skills.filter(s => skillGroup === 'Semua' || s.group === skillGroup).map(skill => <li key={skill.id}><span className="skill-icon" style={{ background: skill.color }}><SkillIcon skill={skill} /></span><div><strong>{skill.name}</strong><span>{skill.group}</span></div></li>)}</ul>
-      </section>
-      <section className="about-section" id="about"><div className="wrap about-grid"><div><p className="section-label">Tentang saya</p><h2>Penasaran dengan<br />cara semuanya<br />terhubung.</h2><div className="about-signature">Rafly Sugiarto<span aria-hidden="true">✳</span></div></div>
-        <div className="about-copy"><p className="about-lead">{site.about}</p><p>{site.approach}</p><h3>Pengalaman</h3><div className="experience-list">{experiences.map(exp => <article key={exp.company}><p className="experience-period">{exp.period}</p><h4>{exp.role}</h4><p className="experience-company">{exp.company}</p><p>{exp.description}</p></article>)}</div></div>
-      </div></section>
-      <section className="contact-section wrap" id="contact"><p className="section-label">Ayo terhubung</p><div className="contact-heading"><h2>{site.contactTitle}</h2><a className="contact-round" href={`mailto:${site.email}`} aria-label="Kirim email ke Rafly"><Arrow diagonal /></a></div><p>{site.contactDescription}</p><a className="email-link" href={`mailto:${site.email}`}>{site.email}</a>
-        <div className="contact-bottom"><span>{site.role}</span><div>{site.links.map(link => <a href={link.url} key={link.label} target="_blank" rel="noreferrer">{link.label}<Arrow diagonal /></a>)}</div></div>
-      </section>
+      <SkillsWorkbench openProject={setSelectedProject} />
+      <AboutSection />
+      <ContactSection />
     </main>
     <footer className="site-footer wrap"><a className="wordmark" href="#hero">rafly<span className="wordmark-dot">.</span></a><span>© {new Date().getFullYear()} {site.name}</span><a href="#hero">Kembali ke atas ↑</a></footer>
     <ProjectDialog project={selectedProject} close={() => setSelectedProject(null)} />

@@ -6,6 +6,9 @@ export const site = {
   approach: 'Saya senang menghubungkan antarmuka yang mudah digunakan dengan sistem di baliknya. Dari data geospasial hingga alur deployment, saya belajar lewat masalah nyata dan project yang saya kerjakan.',
   contactTitle: 'Ada ide yang ingin diwujudkan?',
   contactDescription: 'Mari bicarakan project, kesempatan kerja, atau hal menarik yang sedang kamu bangun.',
+  skillsHeading: ['Satu toolkit.', 'Banyak kemungkinan.'],
+  aboutHeading: ['Penasaran.', 'Lalu membangun.'],
+  focusAreas: ['Web apps', 'Peta interaktif', 'Automation'],
   email: 'rafly23yoi@gmail.com',
   links: [
     { label: 'GitHub', url: 'https://github.com/Nieruuu' },
