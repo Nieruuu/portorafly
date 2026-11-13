@@ -30,7 +30,7 @@ Upload isi `dist/` ke hosting statis setelah build. Build menggunakan base relat
 | `src/content/skills.ts` | Nama teknologi, logo, kategori, warna, badge 3D |
 | `src/content/experiences.ts` | Perusahaan, peran, periode, deskripsi pengalaman |
 
-Untuk menambah project, tambahkan item pada `projects`. Nilai `skills` berisi ID yang sudah ada pada `skills.ts`. Komponen otomatis menampilkan label serta logo yang sesuai. Gambar bersifat opsional; tambahkan gambar asli dan impor dari folder `assets/projects`. Revishit dan POS memakai ringkasan modul yang dibuat dengan HTML/CSS, bukan screenshot aplikasi.
+Untuk menambah project, tambahkan item pada `projects`. Nilai `skills` berisi ID yang sudah ada pada `skills.ts`. Komponen otomatis menampilkan label serta logo yang sesuai. Gambar bersifat opsional; tambahkan gambar asli dan impor dari folder `assets/projects`. Revishit menampilkan screenshot halaman utama, sementara POS menampilkan ringkasan modul dalam HTML/CSS.
 
 Untuk menambah badge, impor logo dari Simple Icons, tambahkan skill dengan `path`, `color`, dan `featured: true`. Posisi 3D serta fallback otomatis dihitung dari jumlah badge. `featured: false` atau tanpa `featured` tetap menampilkan teknologi dalam daftar skills. Jangan menambahkan klaim teknologi yang belum dipakai atau dipelajari.
 

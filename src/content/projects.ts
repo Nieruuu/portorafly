@@ -1,6 +1,7 @@
 import taxmap from '../../assets/projects/taxmap.webp';
 import automation from '../../assets/projects/automation.webp';
 import blog from '../../assets/projects/laravelblog.webp';
+import revishit from '../../assets/projects/revishit.webp';
 
 export interface Project {
   id: string; title: string; category: string; description: string;
@@ -15,6 +16,7 @@ export const projects: Project[] = [
     id: 'revishit', title: 'Revishit', category: 'Web application', color: '#D8EE91',
     description: 'Website layanan pendidikan dengan area member dan admin: dari pendaftaran dan pembayaran hingga pengiriman dan review dokumen.',
     skills: ['laravel', 'react', 'typescript', 'tailwind'], tags: ['Inertia'], visibility: 'public', live: 'https://revishit.com',
+    image: revishit, imageAlt: 'Tampilan halaman utama Revishit Consulting',
     details: [
       'Area member untuk membership, pembayaran, jadwal, serta pengiriman dokumen.',
       'Alur review menyimpan catatan admin dan konfirmasi revisi peserta. Dokumen Google Docs tetap menggunakan link yang sama.',
