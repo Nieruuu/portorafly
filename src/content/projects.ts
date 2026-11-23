@@ -51,4 +51,15 @@ export const projects: Project[] = [
     skills: ['laravel', 'livewire', 'tailwind', 'mysql'], tags: ['Flux UI'], color: '#F1D884', visibility: 'public',
     details: ['Dibangun dengan Laravel 13, Livewire 4, Tailwind CSS 4, Flux UI, dan MySQL.', 'Modul kasir mencakup pencarian produk, kuantitas, diskon, metode pembayaran, dan struk thermal.', 'Akses inventory untuk owner dan akses transaksi untuk kasir. Modul inventory meliputi produk, kategori, stok masuk, stok keluar, dan pergerakan stok.', 'Repository bersifat private.'],
   },
+  {
+    id: 'komplek-hari-bahagia', title: 'Komplek Hari Bahagia', category: 'Permainan web 3D',
+    description: 'Permainan eksplorasi untuk menyampaikan ucapan ulang tahun. Pemain menyusuri dua kampung di tepi sungai, berbincang dengan warga, lalu membuka hadiah dan surat digital.',
+    skills: ['react', 'typescript'], tags: ['Three.js', 'React Three Fiber', 'Vite'],
+    color: '#DCEBF1', visibility: 'public', live: 'https://hbdepi2.vercel.app/',
+    details: [
+      'Pemain dapat memakai keyboard di komputer atau joystick sentuh di ponsel. Peta menunjukkan tujuan berikutnya.',
+      'Three.js dan React Three Fiber menampilkan lingkungan 3D dengan siklus siang dan malam. Lampu jalan dan rumah menyala saat sore.',
+      'Antarmuka dan alur permainan ditulis dengan React dan TypeScript. Vite menghasilkan situs statis yang bisa dimainkan langsung di browser.',
+    ],
+  },
 ];

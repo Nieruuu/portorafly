@@ -134,7 +134,7 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
     <div className="gallery-footer wrap">
       <div className="gallery-position"><span>{String(activeIndex + 1).padStart(2, '0')}</span><span className="gallery-progress"><span className="gallery-progress-fill" /></span><span>{String(visibleProjects.length).padStart(2, '0')}</span></div>
       <div className="gallery-dots" aria-label="Pilih project">{visibleProjects.map((project, i) => <button key={project.id} aria-label={`Tampilkan ${project.title}`} aria-current={activeIndex === i ? 'true' : undefined} onClick={() => jump.current(i)}><span /></button>)}</div>
-      <div className="gallery-actions"><button aria-label="Project sebelumnya" disabled={activeIndex === 0} onClick={() => jump.current(active.current - 1)}>←</button><button aria-label="Project berikutnya" disabled={activeIndex === visibleProjects.length - 1} onClick={() => jump.current(active.current + 1)}>→</button><a href="#iseng">Lihat proyek iseng <span aria-hidden="true">↘</span></a></div>
+      <div className="gallery-actions"><button aria-label="Project sebelumnya" disabled={activeIndex === 0} onClick={() => jump.current(active.current - 1)}>←</button><button aria-label="Project berikutnya" disabled={activeIndex === visibleProjects.length - 1} onClick={() => jump.current(active.current + 1)}>→</button><a href="#skills">Lanjut ke skills <span aria-hidden="true">↘</span></a></div>
     </div>
   </section>;
 }

@@ -1,21 +1,4 @@
-.personal-projects {
-  background: #dcebf1;
-  color: #253d44;
-  overflow: clip;
-}
-.personal-layout {
-  display: grid;
-  grid-template-columns: .9fr 1.1fr;
-  align-items: center;
-  gap: clamp(24px, 6vw, 88px);
-  padding-block: clamp(54px, 7vw, 100px);
-}
-.personal-layout h2 { font-size: 16px; letter-spacing: 0; margin-bottom: 18px; }
-.personal-layout h3 { font-size: clamp(36px, 4.4vw, 64px); letter-spacing: -.055em; line-height: 1.04; max-width: 12ch; }
-.personal-layout p { max-width: 43ch; margin-block: 20px 24px; }
-.personal-link { background: #253d44; color: white; }
-.personal-link:hover, .personal-link:focus-visible { background: #325868; }
-.birthday-scene { position: relative; width: 100%; max-width: 580px; aspect-ratio: 1.45; margin: auto; isolation: isolate; }
+.birthday-scene { display: block; position: absolute; inset: 10%; }
 .birthday-map {
   position: absolute; inset: 5% 6% 8% 3%; overflow: hidden; transform: rotate(-5deg);
   border: 8px solid #fffaf0; border-radius: 3px;
@@ -37,15 +20,7 @@
 .house-mint { --roof: #478676; }
 .house-coral { --roof: #c66550; top: 12%; left: 57%; }
 .house-yellow { --roof: #c79a3f; top: 72%; left: 32%; }
-.birthday-note {
-  position: absolute; right: 1%; bottom: 1%; width: 44%; padding: 5% 4%; transform: rotate(7deg);
-  background: #fff7e7; box-shadow: 1px 5px 12px #384c4529; color: #304a43;
-}
-.birthday-note::before { content: ''; position: absolute; top: -6px; left: 30%; width: 40%; height: 14px; transform: rotate(-3deg); background: #e4bc70d9; }
-.birthday-note span { display: block; font-size: .78rem; margin-bottom: 8px; }
-.birthday-note strong { font-family: var(--heading); font-size: clamp(18px, 2.5vw, 36px); line-height: 1.05; letter-spacing: -.045em; }
-@media (max-width: 700px) {
-  .personal-layout { grid-template-columns: 1fr; }
-  .personal-layout h3 { max-width: none; }
-  .birthday-scene { max-width: 440px; }
+@media (prefers-reduced-motion: no-preference) {
+  .birthday-map { transition: transform .25s ease; }
+  .project-media:is(:hover, :focus-visible) .birthday-map { transform: rotate(-2deg) scale(1.04); }
 }

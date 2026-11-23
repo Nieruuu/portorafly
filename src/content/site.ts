@@ -2,8 +2,8 @@ import { siGithub, siWhatsapp } from 'simple-icons';
 
 export const site = {
   name: 'Rafly Sugiarto', shortName: 'Rafly', role: 'Fullstack Developer & DevOps Enthusiast',
-  headline: ['Dari peta pajak', 'sampai kado.'],
-  intro: 'Waktu magang aku bikin peta untuk menandai objek pajak. Waktu Epi ulang tahun, aku bikin website khusus buat dia. Keduanya bisa kamu lihat di sini.',
+  headline: ['Aku bikin web', 'dan peta.'],
+  intro: 'Waktu magang di Cartenz, aku mengerjakan peta untuk menandai objek pajak. Aku juga membuat aplikasi kasir untuk mencatat penjualan dan stok di Rafly Helm.',
   about: 'Aku kuliah Sistem Informasi di Universitas Bina Sarana Informatika. Aku mulai belajar web karena penasaran sama apa yang terjadi setelah kita klik sesuatu di layar.',
   approach: 'Di Cartenz aku pakai Laravel dan React buat mengerjakan Taxation Map. Di luar magang, salah satu yang kubuat adalah kasir untuk Rafly Helm. Dari situ aku belajar cara mencatat stok masuk dan keluar.',
   contactTitle: 'Mau ngobrol?',
@@ -20,5 +20,5 @@ export const site = {
     { label: 'GitHub', url: 'https://github.com/Nieruuu', iconPath: siGithub.path },
     { label: 'WhatsApp', url: 'https://wa.me/6289512263027', iconPath: siWhatsapp.path },
   ],
-  navigation: [{ label: 'Karya', id: 'projects' }, { label: 'Proyek iseng', id: 'iseng' }, { label: 'Skills', id: 'skills' }, { label: 'Tentang', id: 'about' }, { label: 'Kontak', id: 'contact' }],
+  navigation: [{ label: 'Karya', id: 'projects' }, { label: 'Skills', id: 'skills' }, { label: 'Tentang', id: 'about' }, { label: 'Kontak', id: 'contact' }],
 };
