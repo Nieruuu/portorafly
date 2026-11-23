@@ -48,12 +48,12 @@ function ProjectDialog({ project, close }: { project: Project | null; close: () 
     return () => { element?.close(); document.body.style.overflow = previousOverflow; };
   }, [project]);
   return <dialog ref={dialog} className="project-dialog" aria-labelledby="dialog-title" onClose={close} onClick={e => { if (e.target === e.currentTarget) close(); }}>
-    {project && <><button className="close-dialog" onClick={close} aria-label="Tutup detail project">×</button>
+    {project && <><button className="close-dialog" onClick={close} aria-label="Tutup detail proyek">×</button>
       <p className="section-label">{project.category}</p><h2 id="dialog-title">{project.title}</h2>
       <p>{project.description}</p><ul>{project.details.map(detail => <li key={detail}>{detail}</li>)}</ul>
       <div className="project-tags">{project.skills.map(id => <span key={id}>{skills.find(s => s.id === id)?.name}</span>)}{project.tags?.map(tag => <span key={tag}>{tag}</span>)}</div>
-      <div className="dialog-links">{project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer">Lihat repository <Arrow diagonal /></a>}{project.live && <a className="button secondary" href={project.live} target="_blank" rel="noreferrer">Buka website <Arrow diagonal /></a>}</div>
-      {project.visibility === 'confidential' && <p className="confidential-note">Repository tidak dipublikasikan karena kerahasiaan perusahaan.</p>}
+      <div className="dialog-links">{project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer">Lihat repositori <Arrow diagonal /></a>}{project.live && <a className="button secondary" href={project.live} target="_blank" rel="noreferrer">Kunjungi situs <Arrow diagonal /></a>}</div>
+      {project.visibility === 'confidential' && <p className="confidential-note">Kode sumber merupakan aset internal perusahaan.</p>}
     </>}
   </dialog>;
 }
@@ -113,7 +113,7 @@ export default function App() {
     </header>
     <main id="main">
       <section className="hero wrap" id="hero">
-        <div className="hero-copy"><p className="hero-intro">Halo, aku {site.name}<span className="hello-mark" aria-hidden="true">✳</span></p>
+        <div className="hero-copy"><p className="hero-intro">Halo, saya {site.name}<span className="hello-mark" aria-hidden="true">✳</span></p>
           <h1>{site.headline.map(line => <span key={line}>{line}</span>)}</h1>
           <p className="hero-description">{site.intro}</p>
           <nav className="hero-socials" aria-label="Media sosial Rafly">
@@ -126,8 +126,8 @@ export default function App() {
           </nav>
           <div className="hero-actions"><a className="button primary" href="#projects">Lihat proyek <Arrow /></a><a className="text-link" href={`mailto:${site.email}`}>Kirim email <Arrow diagonal /></a></div>
           <p className="hero-role">{site.role}</p>
-        </div><div className="hero-transition" aria-hidden="true"><span>Yang pernah</span><span>kukerjakan.</span><p>Scroll untuk lihat proyek <Arrow /></p></div><HeroVisual motion={motion} />
-        <div className="hero-footer"><span>Web development / Geospatial / Automation</span><a href="#projects">Scroll untuk menjelajah <span aria-hidden="true">↓</span></a></div>
+        </div><div className="hero-transition" aria-hidden="true"><span>Proyek</span><span>pilihan saya</span><p>Gulir untuk melihat proyek <Arrow /></p></div><HeroVisual motion={motion} />
+        <div className="hero-footer"><span>Pengembangan web / Geospasial / DevOps</span><a href="#projects">Jelajahi proyek <span aria-hidden="true">↓</span></a></div>
       </section>
       <ProjectGallery openProject={setSelectedProject} renderVisual={project => <ProjectVisual project={project} />} />
       <SkillsWorkbench openProject={setSelectedProject} />

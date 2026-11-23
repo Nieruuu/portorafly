@@ -11,11 +11,11 @@ export function AboutSection() {
     <div className="wrap profile-layout">
       <div className="profile-intro"><h2 id="about-heading">{site.aboutHeading.map(line => <span key={line}>{line}</span>)}</h2>
         <div className="profile-object" aria-hidden="true"><div className="profile-backplate" /><div className="profile-monogram">{initials}</div><span className="profile-sticker">Sistem<br />Informasi</span><div className="profile-orbit" /></div>
-        <p className="profile-name">{site.name}<span>Fullstack developer</span></p>
+        <p className="profile-name">{site.name}<span>{site.role}</span></p>
         <div className="profile-focus">{site.focusAreas.map(area => <span key={area}>{area}</span>)}</div>
       </div>
       <div className="profile-story"><p className="profile-lead">{site.about}</p><p>{site.approach}</p>
-        <div className="profile-experience-heading"><h3>Pengalamanku</h3><span aria-hidden="true">↙</span></div>
+        <div className="profile-experience-heading"><h3>Pengalaman profesional</h3><span aria-hidden="true">↙</span></div>
         <div className="profile-timeline">{experiences.map(exp => <article key={`${exp.company}-${exp.role}-${exp.period}`}>
           <span className="profile-timeline-dot" aria-hidden="true" /><p className="profile-period">{exp.period}</p><div className="profile-experience-card"><h4>{exp.role}</h4><p className="profile-company">{exp.company}</p><p>{exp.description}</p></div>
         </article>)}</div>
@@ -29,7 +29,7 @@ export function ContactSection() {
     <div className="wrap">
       <div className="contact-poster-top"><p className="section-label">Kontak</p></div>
       <div className="contact-poster-layout"><div className="contact-poster-copy"><h2 id="contact-heading">{site.contactTitle}</h2><p>{site.contactDescription}</p><a className="contact-email" href={`mailto:${site.email}`}>{site.email}<ContactArrow /></a></div>
-        <a className="contact-envelope" href={`mailto:${site.email}`} aria-label="Kirim email ke Rafly"><div className="envelope-paper" aria-hidden="true"><span>Buat {site.shortName}</span><strong>Halo,<br />Rafly!</strong><div className="paper-rule" /><div className="paper-rule short-rule" /></div><div className="envelope-body" aria-hidden="true"><span>Kirim email</span></div><span className="contact-stamp" aria-hidden="true"><ContactArrow /></span></a>
+        <a className="contact-envelope" href={`mailto:${site.email}`} aria-label="Kirim email ke Rafly"><div className="envelope-paper" aria-hidden="true"><span>Kepada {site.shortName}</span><strong>Halo,<br />Rafly!</strong><div className="paper-rule" /><div className="paper-rule short-rule" /></div><div className="envelope-body" aria-hidden="true"><span>Kirim email</span></div><span className="contact-stamp" aria-hidden="true"><ContactArrow /></span></a>
       </div>
       <div className="contact-poster-bottom"><span>{site.role}</span><div>{site.links.map(link => <a href={link.url} key={link.label} target="_blank" rel="noreferrer">{link.label}<ContactArrow /></a>)}</div></div>
     </div>

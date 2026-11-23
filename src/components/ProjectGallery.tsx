@@ -15,7 +15,7 @@ export function ProjectGallery({ openProject, renderVisual }: GalleryProps) {
   return (
     <section className="project-gallery" id="projects" aria-labelledby="gallery-heading">
       <div className="wrap">
-        <h2 id="gallery-heading">Proyek yang pernah kubuat</h2>
+        <h2 id="gallery-heading">Proyek pilihan</h2>
         <div className="gallery-grid">
           {visibleProjects.map(project => (
             <article className="gallery-card" key={project.id} style={{ '--project-color': project.color } as CSSProperties}>
@@ -45,7 +45,7 @@ export function ProjectGallery({ openProject, renderVisual }: GalleryProps) {
             </article>
           ))}
         </div>
-        <a className="gallery-next" href="#skills">Lanjut ke skills <span aria-hidden="true">↓</span></a>
+        <a className="gallery-next" href="#skills">Lihat keahlian <span aria-hidden="true">↓</span></a>
       </div>
     </section>
   );

@@ -1,16 +1,16 @@
 import { siGithub, siWhatsapp } from 'simple-icons';
 
 export const site = {
-  name: 'Rafly Sugiarto', shortName: 'Rafly', role: 'Fullstack Developer & DevOps Enthusiast',
-  headline: ['Aku bikin web', 'dan peta.'],
-  intro: 'Waktu magang di Cartenz, aku mengerjakan peta untuk menandai objek pajak. Aku juga membuat aplikasi kasir untuk mencatat penjualan dan stok di Rafly Helm.',
-  about: 'Aku kuliah Sistem Informasi di Universitas Bina Sarana Informatika. Aku mulai belajar web karena penasaran sama apa yang terjadi setelah kita klik sesuatu di layar.',
-  approach: 'Di Cartenz aku pakai Laravel dan React buat mengerjakan Taxation Map. Di luar magang, salah satu yang kubuat adalah kasir untuk Rafly Helm. Dari situ aku belajar cara mencatat stok masuk dan keluar.',
-  contactTitle: 'Mau ngobrol?',
-  contactDescription: 'Kalau ada yang mau kamu tanyakan soal proyekku, atau ada kerjaan yang bisa kita garap bareng, kirim email aja.',
-  skillsHeading: ['Yang kupakai', 'buat ngoding.'],
-  aboutHeading: ['Sedikit', 'tentang aku.'],
-  focusAreas: ['Web apps', 'Peta interaktif', 'Automation'],
+  name: 'Rafly Sugiarto', shortName: 'Rafly', role: 'Fullstack Developer',
+  headline: ['Fullstack', 'dan DevOps'],
+  intro: 'Saya membangun aplikasi web dengan Laravel dan React. Saya juga tertarik pada DevOps, terutama cara mengotomatiskan rilis agar setiap versi aplikasi dapat diterapkan dengan langkah yang konsisten.',
+  about: 'Saya mempelajari Sistem Informasi di Universitas Bina Sarana Informatika. Dalam pengembangan fullstack, saya tertarik pada cara antarmuka dan basis data bekerja bersama. Pada proyek Taxation Map di Cartenz, misalnya, pengguna dapat mengubah batas objek pajak langsung pada peta dan menyimpan atributnya.',
+  approach: 'Di bidang DevOps, saya ingin mengurangi langkah manual saat merilis aplikasi. Selama magang di Cartenz, saya menggunakan Python dan Docker untuk mengotomatiskan proses deployment. Pada proyek mandiri, saya juga menggunakan GitHub Actions untuk menjalankan alur CI/CD.',
+  contactTitle: 'Hubungi saya',
+  contactDescription: 'Untuk membahas proyek, peluang kerja, atau kolaborasi di bidang pengembangan web dan DevOps, silakan hubungi saya melalui email atau LinkedIn.',
+  skillsHeading: ['Teknologi yang', 'saya gunakan'],
+  aboutHeading: ['Tentang saya'],
+  focusAreas: ['Aplikasi web', 'Peta interaktif', 'Otomatisasi deployment'],
   email: 'rafly23yoi@gmail.com',
   links: [
     {
@@ -20,5 +20,5 @@ export const site = {
     { label: 'GitHub', url: 'https://github.com/Nieruuu', iconPath: siGithub.path },
     { label: 'WhatsApp', url: 'https://wa.me/6289512263027', iconPath: siWhatsapp.path },
   ],
-  navigation: [{ label: 'Karya', id: 'projects' }, { label: 'Skills', id: 'skills' }, { label: 'Tentang', id: 'about' }, { label: 'Kontak', id: 'contact' }],
+  navigation: [{ label: 'Proyek', id: 'projects' }, { label: 'Keahlian', id: 'skills' }, { label: 'Profil', id: 'about' }, { label: 'Kontak', id: 'contact' }],
 };

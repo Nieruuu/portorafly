@@ -14,14 +14,14 @@ export function SkillsWorkbench({ openProject }: { openProject: (project: Projec
   return <section className="skills-section workshop-section" id="skills" aria-labelledby="skills-heading">
     <div className="wrap workshop-layout">
       <div className="workshop-intro">
-        <p className="section-label">Skills</p>
+        <p className="section-label">Keahlian</p>
         <h2 id="skills-heading">{site.skillsHeading.map(line => <span key={line}>{line}</span>)}</h2>
-        <p>Untuk peta aku pakai OpenLayers. Buat kasir Rafly Helm, aku pakai Livewire.</p>
-        <div className="workshop-note"><span aria-hidden="true">↳</span><p>Pilih alatnya untuk lihat proyek yang pakai itu.</p></div>
+        <p>Saya menggunakan OpenLayers untuk menyunting geometri pada peta dan Livewire untuk membangun antarmuka kasir Rafly Helm.</p>
+        <div className="workshop-note"><span aria-hidden="true">↳</span><p>Pilih teknologi untuk melihat proyek terkait.</p></div>
 
       </div>
       <div className="workbench">
-        <div className="workbench-top"><span>Meja kerja</span><span>{filtered.length} alat</span></div>
+        <div className="workbench-top"><span>Daftar teknologi</span><span>{filtered.length} teknologi</span></div>
         <div className="skill-filters" role="group" aria-label="Filter kelompok teknologi">
           {['Semua', 'Frontend', 'Backend & data', 'DevOps & tools'].map(category => <button key={category} aria-pressed={group === category} onClick={() => setGroup(category)}>{category}</button>)}
         </div>
@@ -33,7 +33,7 @@ export function SkillsWorkbench({ openProject }: { openProject: (project: Projec
         </li>)}</ul>
         {selected ? <div className="workbench-detail">
           <div className="workbench-selected"><span className="selected-logo" style={{ background: selected.color }}><SkillIcon skill={selected} /></span><div><span>{selected.group}</span><h3>{selected.name}</h3></div></div>
-          {related.length ? <div className="workbench-projects"><p>Dipakai dalam</p><div>{related.map(project => <button key={project.id} onClick={() => openProject(project)}>{project.title}<span aria-hidden="true">↗</span></button>)}</div></div> : <p className="workbench-learning">Aku juga belajar pakai {selected.name}.</p>}
+          {related.length ? <div className="workbench-projects"><p>Proyek terkait</p><div>{related.map(project => <button key={project.id} onClick={() => openProject(project)}>{project.title}<span aria-hidden="true">↗</span></button>)}</div></div> : <p className="workbench-learning">Saya sedang mempelajari {selected.name}.</p>}
         </div> : <p>Belum ada teknologi pada kelompok ini.</p>}
       </div>
     </div>
