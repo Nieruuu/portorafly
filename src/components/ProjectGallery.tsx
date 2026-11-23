@@ -109,10 +109,10 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
   }, [motion]);
 
   return <section ref={host} className="project-gallery" id="projects" aria-labelledby="gallery-heading">
-    <div className="gallery-watermark" aria-hidden="true">Selected work</div>
+    <div className="gallery-watermark" aria-hidden="true">Proyek</div>
     <div className="gallery-heading wrap">
-      <div><p className="section-label">Pilihan karya</p><h2 id="gallery-heading">Ide yang jadi nyata.</h2></div>
-      <p className="gallery-instruction"><span className="horizontal-instruction">Scroll ke bawah, jelajahi ke samping.</span><span className="vertical-instruction">Jelajahi project dan cerita di baliknya.</span><span>Web development / Geospatial / Automation</span></p>
+      <div><h2 id="gallery-heading">Proyek yang pernah kubuat</h2></div>
+      <p className="gallery-instruction"><span className="horizontal-instruction">Scroll ke bawah untuk menggeser kartu.</span><span className="vertical-instruction">Ketuk kartu untuk lihat detailnya.</span><span>Web development / Geospatial / Automation</span></p>
     </div>
     <div className="gallery-viewport">
       <div className="gallery-track" ref={track}>
@@ -126,7 +126,7 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
             <p className="project-description">{project.description}</p>
             {project.id === 'taxation-map' && <p className="image-note">Preview dari versi sebelumnya.</p>}
             <div className="project-tags">{project.skills.map(id => { const skill = skills.find(s => s.id === id); return skill ? <span key={id}><SkillIcon skill={skill} />{skill.name}</span> : null; })}{project.tags?.map(tag => <span key={tag}>{tag}</span>)}</div>
-            <button className="gallery-detail" onClick={() => openProject(project)}>Tentang project <span aria-hidden="true">↗</span></button>
+            <button className="gallery-detail" onClick={() => openProject(project)}>Detail proyek <span aria-hidden="true">↗</span></button>
           </div>
         </article>)}
       </div>
@@ -134,7 +134,7 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
     <div className="gallery-footer wrap">
       <div className="gallery-position"><span>{String(activeIndex + 1).padStart(2, '0')}</span><span className="gallery-progress"><span className="gallery-progress-fill" /></span><span>{String(visibleProjects.length).padStart(2, '0')}</span></div>
       <div className="gallery-dots" aria-label="Pilih project">{visibleProjects.map((project, i) => <button key={project.id} aria-label={`Tampilkan ${project.title}`} aria-current={activeIndex === i ? 'true' : undefined} onClick={() => jump.current(i)}><span /></button>)}</div>
-      <div className="gallery-actions"><button aria-label="Project sebelumnya" disabled={activeIndex === 0} onClick={() => jump.current(active.current - 1)}>←</button><button aria-label="Project berikutnya" disabled={activeIndex === visibleProjects.length - 1} onClick={() => jump.current(active.current + 1)}>→</button><a href="#skills">Lanjut ke skills <span aria-hidden="true">↘</span></a></div>
+      <div className="gallery-actions"><button aria-label="Project sebelumnya" disabled={activeIndex === 0} onClick={() => jump.current(active.current - 1)}>←</button><button aria-label="Project berikutnya" disabled={activeIndex === visibleProjects.length - 1} onClick={() => jump.current(active.current + 1)}>→</button><a href="#iseng">Lihat proyek iseng <span aria-hidden="true">↘</span></a></div>
     </div>
   </section>;
 }

@@ -37,12 +37,12 @@ export function HeroVisual({ motion = true }: { motion?: boolean }) {
   const animated = motion && supported && !reduced && !failed && visible && !narrow;
   const fallback = <StaticBadges motion={motion && !reduced && visible} />;
   return <div className="hero-art" ref={host}>
-    <div className="art-caption"><span className="tiny-orbit" /> Tools of my trade</div>
+    <div className="art-caption"><span className="tiny-orbit" /> Alat yang kupakai</div>
     <div className="scene-shell" role="img" aria-label={`Komposisi badge clay: ${skills.filter(s => s.featured).map(s => s.name).join(', ')}`}>
       <SceneBoundary fallback={fallback}>
         {animated ? <Suspense fallback={fallback}><TechScene onFailure={() => setFailed(true)} /></Suspense> : fallback}
       </SceneBoundary>
     </div>
-    <div className="art-bottom"><span>Ide kecil. Banyak kemungkinan.</span></div>
+
   </div>;
 }

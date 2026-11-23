@@ -9,6 +9,7 @@ import { ProjectGallery } from './components/ProjectGallery';
 import { useMediaQuery } from './hooks/useMediaQuery';
 import { SkillsWorkbench } from './components/SkillsWorkbench';
 import { AboutSection, ContactSection } from './components/ProfileSections';
+import { PersonalProjects } from './components/PersonalProjects';
 import './motion.css';
 import './sections.css';
 gsap.registerPlugin(ScrollTrigger);
@@ -19,7 +20,7 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 
 function ProjectVisual({ project }: { project: Project }) {
   if (project.image) return <img src={project.image} alt={project.imageAlt} loading="lazy" width="1200" height="750" />;
-  if (project.id === 'pos-inventory') return <div className="pos-visual" aria-label="Ringkasan modul POS Inventory, bukan screenshot aplikasi"><span className="pos-brand">Rafly Helm</span><strong>Penjualan bertemu<br />pengelolaan stok.</strong><div className="pos-modules"><span>Kasir<Arrow /></span><span>Inventory<Arrow /></span></div><span className="pos-caption">Ringkasan modul aplikasi</span></div>;
+  if (project.id === 'pos-inventory') return <div className="pos-visual" aria-label="Ringkasan modul POS Inventory, bukan screenshot aplikasi"><span className="pos-brand">Rafly Helm</span><strong>Kasir dan stok<br />Rafly Helm.</strong><div className="pos-modules"><span>Kasir<Arrow /></span><span>Inventory<Arrow /></span></div><span className="pos-caption">Ringkasan modul aplikasi</span></div>;
   return <div className="revishit-visual" aria-label="Ringkasan alur aplikasi Revishit">
     <div className="rev-brand">revishit</div>
     <div className="flow-board"><span>Alur aplikasi</span><strong>Langkah berikutnya,<br />lebih terarah.</strong>
@@ -67,6 +68,14 @@ export default function App() {
       gsap.from('.workbench', { y: 38, rotation: 1.5, duration: 0.9, ease: 'power2.out', scrollTrigger: { trigger: '#skills', start: 'top 72%', once: true } });
       gsap.fromTo('.profile-monogram', { y: 22, rotation: -9 }, { y: -28, rotation: 3, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
       gsap.fromTo('.profile-sticker', { y: 15, rotation: 12 }, { y: -38, rotation: -4, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+      const birthday = gsap.timeline({
+        scrollTrigger: { trigger: '.birthday-scene', start: 'top 95%', end: 'center 42%', scrub: 0.45 },
+      });
+      birthday.fromTo('.birthday-map', { y: 28, rotation: -11 }, { y: 0, rotation: -5, duration: 1 }, 0)
+        .from('.map-house', { y: -18, scale: 0.8, stagger: 0.14, duration: 0.45 }, 0.12)
+        .fromTo('.birthday-note', { x: 22, y: 48, rotation: 16 }, { x: 0, y: 0, rotation: 7, duration: 0.7 }, 0.35);
+      gsap.from('.contact-stamp', { rotation: -35, scale: 0.8, ease: 'none',
+        scrollTrigger: { trigger: '.contact-envelope', start: 'top 95%', end: 'center 55%', scrub: true } });
       gsap.fromTo('.contact-envelope', { rotation: -10, y: 30 }, { rotation: 3, y: -12, ease: 'none', scrollTrigger: { trigger: '#contact', start: 'top bottom', end: 'bottom bottom', scrub: 0.8 } });
     });
     media.add('(min-width: 900px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)', () => {
@@ -105,15 +114,24 @@ export default function App() {
     </header>
     <main id="main">
       <section className="hero wrap" id="hero">
-        <div className="hero-copy"><p className="hero-intro">Halo, saya {site.name}<span className="hello-mark" aria-hidden="true">✳</span></p>
+        <div className="hero-copy"><p className="hero-intro">Halo, aku {site.name}<span className="hello-mark" aria-hidden="true">✳</span></p>
           <h1>{site.headline.map(line => <span key={line}>{line}</span>)}</h1>
           <p className="hero-description">{site.intro}</p>
-          <div className="hero-actions"><a className="button primary" href="#projects">Jelajahi karya <Arrow /></a><a className="text-link" href={`mailto:${site.email}`}>Mari ngobrol <Arrow diagonal /></a></div>
+          <nav className="hero-socials" aria-label="Media sosial Rafly">
+            {site.links.map(link => (
+              <a key={link.label} href={link.url} target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={link.iconPath} /></svg>
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div className="hero-actions"><a className="button primary" href="#projects">Lihat proyek <Arrow /></a><a className="text-link" href={`mailto:${site.email}`}>Kirim email <Arrow diagonal /></a></div>
           <p className="hero-role">{site.role}</p>
-        </div><div className="hero-transition" aria-hidden="true"><span>Dari tools,</span><span>jadi karya.</span><p>Scroll untuk masuk ke project <Arrow /></p></div><HeroVisual motion={motion} />
+        </div><div className="hero-transition" aria-hidden="true"><span>Yang pernah</span><span>kukerjakan.</span><p>Scroll untuk lihat proyek <Arrow /></p></div><HeroVisual motion={motion} />
         <div className="hero-footer"><span>Web development / Geospatial / Automation</span><a href="#projects">Scroll untuk menjelajah <span aria-hidden="true">↓</span></a></div>
       </section>
       <ProjectGallery motion={motion} openProject={setSelectedProject} renderVisual={project => <ProjectVisual project={project} />} />
+      <PersonalProjects />
       <SkillsWorkbench openProject={setSelectedProject} />
       <AboutSection />
       <ContactSection />

@@ -1,0 +1,51 @@
+.personal-projects {
+  background: #dcebf1;
+  color: #253d44;
+  overflow: clip;
+}
+.personal-layout {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  align-items: center;
+  gap: clamp(24px, 6vw, 88px);
+  padding-block: clamp(54px, 7vw, 100px);
+}
+.personal-layout h2 { font-size: 16px; letter-spacing: 0; margin-bottom: 18px; }
+.personal-layout h3 { font-size: clamp(36px, 4.4vw, 64px); letter-spacing: -.055em; line-height: 1.04; max-width: 12ch; }
+.personal-layout p { max-width: 43ch; margin-block: 20px 24px; }
+.personal-link { background: #253d44; color: white; }
+.personal-link:hover, .personal-link:focus-visible { background: #325868; }
+.birthday-scene { position: relative; width: 100%; max-width: 580px; aspect-ratio: 1.45; margin: auto; isolation: isolate; }
+.birthday-map {
+  position: absolute; inset: 5% 6% 8% 3%; overflow: hidden; transform: rotate(-5deg);
+  border: 8px solid #fffaf0; border-radius: 3px;
+  background-color: #bbd5a8;
+  background-image: radial-gradient(#95b889 1px, transparent 1px);
+  background-size: 8px 8px;
+  box-shadow: 1px 4px 0 #c5c7ae, 3px 16px 20px #39526028;
+}
+.map-pond { position: absolute; left: -8%; bottom: -13%; width: 47%; height: 52%; border-radius: 47%; background: #97c9d6; border: 5px solid #dbe8c4; }
+.map-road { position: absolute; top: 42%; left: -12%; width: 125%; height: 13%; background: #fff3d5; border-block: 2px solid #c1bda0; transform: rotate(-13deg); }
+.map-crossroad { top: 50%; left: 3%; width: 85%; height: 11%; transform: rotate(70deg); }
+.map-folds { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 28%, #324a4220 33%, #fffc 33.3%, transparent 34%, transparent 66%, #f7ffe799 66.5%, #324a4222 67%, transparent 74%); }
+.map-house {
+  position: absolute; left: 17%; top: 22%; width: 12%; height: 16%;
+  background: #fff3d9; border-radius: 2px; box-shadow: 4px 6px 0 #425a4230;
+}
+.map-house::before { content: ''; position: absolute; inset: -36% -14% 65%; background: var(--roof); clip-path: polygon(50% 0,100% 85%,100% 100%,0 100%,0 85%); }
+.map-house::after { content: ''; position: absolute; left: 38%; bottom: 0; width: 28%; height: 50%; background: #54716a; }
+.house-mint { --roof: #478676; }
+.house-coral { --roof: #c66550; top: 12%; left: 57%; }
+.house-yellow { --roof: #c79a3f; top: 72%; left: 32%; }
+.birthday-note {
+  position: absolute; right: 1%; bottom: 1%; width: 44%; padding: 5% 4%; transform: rotate(7deg);
+  background: #fff7e7; box-shadow: 1px 5px 12px #384c4529; color: #304a43;
+}
+.birthday-note::before { content: ''; position: absolute; top: -6px; left: 30%; width: 40%; height: 14px; transform: rotate(-3deg); background: #e4bc70d9; }
+.birthday-note span { display: block; font-size: .78rem; margin-bottom: 8px; }
+.birthday-note strong { font-family: var(--heading); font-size: clamp(18px, 2.5vw, 36px); line-height: 1.05; letter-spacing: -.045em; }
+@media (max-width: 700px) {
+  .personal-layout { grid-template-columns: 1fr; }
+  .personal-layout h3 { max-width: none; }
+  .birthday-scene { max-width: 440px; }
+}
