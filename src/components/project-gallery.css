@@ -90,6 +90,7 @@
 .gallery-technologies svg { width: 14px; height: 14px; fill: currentColor; }
 .gallery-card-footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
@@ -109,8 +110,9 @@
   font-size: 14px;
   font-weight: 600;
 }
-/* The native button is the only tab stop and its hit area covers the card. */
+/* The detail button covers the card, with the independent site link above it. */
 .gallery-detail::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: 18px; }
+.gallery-card-footer .project-site-link { position: relative; z-index: 2; }
 .gallery-detail span { font-size: 20px; line-height: 1; }
 .gallery-private { font-size: 13px; color: var(--muted); }
 .gallery-card:focus-within { outline: 3px solid var(--lime); outline-offset: 4px; }
@@ -140,13 +142,13 @@
 .gallery-receipt i { width: 20%; height: 2px; background: #bab4a7; }
 @media (hover: hover) and (pointer: fine) {
   .gallery-card:hover { box-shadow: 0 0 0 2px var(--project-color), 0 8px 22px #0003; }
-  .gallery-card:hover .gallery-detail { background: var(--blue); }
+  .gallery-detail:hover { background: var(--blue); }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .gallery-card, .gallery-detail { transition: box-shadow .2s ease, background-color .2s ease; }
   .gallery-art, .gallery-detail span { transition: transform .24s ease-out; }
   .gallery-card:hover .gallery-art { transform: scale(1.035); }
-  .gallery-card:hover .gallery-detail span { transform: translateX(3px); }
+  .gallery-detail:hover span { transform: translateX(3px); }
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {

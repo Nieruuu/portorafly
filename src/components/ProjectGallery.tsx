@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { projects, type Project } from '../content/projects';
 import { skills } from '../content/skills';
 import { SkillIcon } from './SkillIcon';
+import { ProjectSiteLink } from './ProjectSiteLink';
 import './project-gallery.css';
 
 const visibleProjects = projects.filter(project => project.visibility !== 'pending');
@@ -40,6 +41,7 @@ export function ProjectGallery({ openProject, renderVisual }: GalleryProps) {
                   aria-label={`Lihat detail ${project.title}`} onClick={() => openProject(project)}>
                   Lihat detail <span aria-hidden="true">→</span>
                 </button>
+                <ProjectSiteLink project={project} />
                 {project.visibility === 'confidential' && <span className="gallery-private">Kode internal</span>}
               </div>
             </article>

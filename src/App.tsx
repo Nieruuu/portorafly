@@ -6,6 +6,7 @@ import { type Project } from './content/projects';
 import { skills } from './content/skills';
 import { HeroVisual } from './components/HeroVisual';
 import { ProjectGallery } from './components/ProjectGallery';
+import { ProjectSiteLink } from './components/ProjectSiteLink';
 import { useMediaQuery } from './hooks/useMediaQuery';
 import { SkillsWorkbench } from './components/SkillsWorkbench';
 import { AboutSection, ContactSection } from './components/ProfileSections';
@@ -52,7 +53,10 @@ function ProjectDialog({ project, close }: { project: Project | null; close: () 
       <p className="section-label">{project.category}</p><h2 id="dialog-title">{project.title}</h2>
       <p>{project.description}</p><ul>{project.details.map(detail => <li key={detail}>{detail}</li>)}</ul>
       <div className="project-tags">{project.skills.map(id => <span key={id}>{skills.find(s => s.id === id)?.name}</span>)}{project.tags?.map(tag => <span key={tag}>{tag}</span>)}</div>
-      <div className="dialog-links">{project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer">Lihat repositori <Arrow diagonal /></a>}{project.live && <a className="button secondary" href={project.live} target="_blank" rel="noreferrer">Kunjungi situs <Arrow diagonal /></a>}</div>
+      <div className="dialog-links">
+        <ProjectSiteLink project={project} />
+        {project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer">Lihat repositori <Arrow diagonal /></a>}
+      </div>
       {project.visibility === 'confidential' && <p className="confidential-note">Kode sumber merupakan aset internal perusahaan.</p>}
     </>}
   </dialog>;
