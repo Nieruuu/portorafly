@@ -52,7 +52,7 @@ export const projects: Project[] = [
     details: ['Dibangun dengan Laravel 13, Livewire 4, Tailwind CSS 4, Flux UI, dan MySQL.', 'Modul kasir mencakup pencarian produk, kuantitas, diskon, metode pembayaran, dan struk thermal.', 'Akses inventory untuk owner dan akses transaksi untuk kasir. Modul inventory meliputi produk, kategori, stok masuk, stok keluar, dan pergerakan stok.', 'Repository bersifat private.'],
   },
   {
-    id: 'komplek-hari-bahagia', title: 'Komplek Hari Bahagia', category: 'Permainan web 3D',
+    id: 'Website Ucapan Ulang Tahun', title: 'Website Ucapan Ulang Tahun', category: 'Permainan web 3D',
     description: 'Permainan eksplorasi untuk menyampaikan ucapan ulang tahun. Pemain menyusuri dua kampung di tepi sungai, berbincang dengan warga, lalu membuka hadiah dan surat digital.',
     skills: ['react', 'typescript'], tags: ['Three.js', 'React Three Fiber', 'Vite'],
     color: '#DCEBF1', visibility: 'public', live: 'https://hbdepi2.vercel.app/',
