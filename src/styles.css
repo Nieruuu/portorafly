@@ -81,3 +81,6 @@
   .project-site-link:is(:hover, :focus-visible) span { transform: translate(2px, -2px); }
   .project-site-link:active span { transform: scale(.9); }
 }
+.hero-actions { flex-wrap: wrap; }
+.cv-download { border: 1px solid #a4ad9e; }
+.cv-download:is(:hover, :focus-visible) { border-color: var(--blue); color: var(--blue); }

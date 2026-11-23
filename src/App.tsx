@@ -11,6 +11,7 @@ import { useMediaQuery } from './hooks/useMediaQuery';
 import { SkillsWorkbench } from './components/SkillsWorkbench';
 import { AboutSection, ContactSection } from './components/ProfileSections';
 import { NeighborhoodPreview } from './components/NeighborhoodPreview';
+import cvUrl from '../assets/CV-Rafly-Sugiarto.pdf?url';
 import './motion.css';
 import './sections.css';
 gsap.registerPlugin(ScrollTrigger);
@@ -128,12 +129,21 @@ export default function App() {
               </a>
             ))}
           </nav>
-          <div className="hero-actions"><a className="button primary" href="#projects">Lihat proyek <Arrow /></a><a className="text-link" href={`mailto:${site.email}`}>Kirim email <Arrow diagonal /></a></div>
+          <div className="hero-actions">
+            <a className="button primary" href="#projects">Lihat proyek <Arrow /></a>
+            <a className="button cv-download" href={cvUrl} download="CV-Rafly-Sugiarto.pdf">
+              Unduh CV
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+                <path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4" />
+              </svg>
+            </a>
+            <a className="text-link" href={`mailto:${site.email}`}>Kirim email <Arrow diagonal /></a>
+          </div>
           <p className="hero-role">{site.role}</p>
         </div><div className="hero-transition" aria-hidden="true"><span>Proyek</span><span>pilihan saya</span><p>Gulir untuk melihat proyek <Arrow /></p></div><HeroVisual motion={motion} />
         <div className="hero-footer"><span>Pengembangan web / Geospasial / DevOps</span><a href="#projects">Jelajahi proyek <span aria-hidden="true">↓</span></a></div>
       </section>
-      <ProjectGallery openProject={setSelectedProject} renderVisual={project => <ProjectVisual project={project} />} />
+      <ProjectGallery motion={motion} openProject={setSelectedProject} renderVisual={project => <ProjectVisual project={project} />} />
       <SkillsWorkbench openProject={setSelectedProject} />
       <AboutSection />
       <ContactSection />
