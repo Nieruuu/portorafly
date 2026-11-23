@@ -23,10 +23,12 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 function ProjectVisual({ project }: { project: Project }) {
   if (project.image) return <img src={project.image} alt={project.imageAlt} loading="lazy" width="1200" height="750" />;
   if (project.id === 'komplek-hari-bahagia') return <NeighborhoodPreview />;
-  if (project.id === 'pos-inventory') return <div className="gallery-receipt" aria-hidden="true">
-    <strong>Rafly Helm</strong><span>Struk penjualan</span>
-    <div><span>Produk</span><span>Jumlah</span></div>
-    <div><span>Subtotal</span><i /></div><div><b>Total</b><i /></div>
+  if (project.id === 'pos-inventory') return <div className="receipt-printer" aria-hidden="true">
+    <div className="receipt-feed"><div className="gallery-receipt">
+      <strong>Rafly Helm</strong><span>Struk penjualan</span>
+      <div><span>Produk</span><span>Jumlah</span></div>
+      <div><span>Subtotal</span><i /></div><div><b>Total</b><i /></div>
+    </div></div>
   </div>;
   return <div className="revishit-visual" aria-label="Ringkasan alur aplikasi Revishit">
     <div className="rev-brand">revishit</div>

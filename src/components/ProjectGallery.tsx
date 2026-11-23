@@ -4,7 +4,9 @@ import { projects, type Project } from '../content/projects';
 import { skills } from '../content/skills';
 import { SkillIcon } from './SkillIcon';
 import { ProjectSiteLink } from './ProjectSiteLink';
+import { ProjectMotionAccent } from './ProjectMotionAccent';
 import './project-gallery.css';
+import './project-motion.css';
 
 const visibleProjects = projects.filter(project => project.visibility !== 'pending');
 
@@ -27,8 +29,15 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
     const track = section.current;
     const viewport = stage.current;
     if (!track || !viewport || last < 1) return;
+    // Start the first scene when the visitor reaches it, not when the page loads.
+    const observer = motion && 'IntersectionObserver' in window
+      ? new IntersectionObserver(([entry]) => viewport.toggleAttribute('data-onstage', entry.intersectionRatio >= 0.5), { threshold: 0.5 })
+      : null;
+    observer?.observe(viewport);
     const sync = (scroll: ScrollTrigger) => {
-      const next = Math.round(scroll.progress * last);
+      const position = scroll.progress * last;
+      const next = Math.round(position);
+      if (motion) viewport.style.setProperty('--slide-travel', ((position - next) * 2).toFixed(3));
       if (next === active.current) return;
       setSlide({ index: next, direction: next < active.current ? 'up' : 'down' });
       active.current = next;
@@ -44,8 +53,11 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
     return () => {
       scroll.kill();
       trigger.current = null;
+      observer?.disconnect();
+      viewport.removeAttribute('data-onstage');
+      viewport.style.removeProperty('--slide-travel');
     };
-  }, [last]);
+  }, [last, motion]);
 
   function goTo(next: number) {
     const scroll = trigger.current;
@@ -71,7 +83,10 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
           <article className="gallery-card" data-direction={direction}
             style={{ '--project-color': project.color } as CSSProperties}>
             <div className="gallery-preview">
-              <div className="gallery-art">{renderVisual(project)}</div>
+              <div className="gallery-camera">
+                <div className="gallery-art">{renderVisual(project)}</div>
+                <ProjectMotionAccent projectId={project.id} />
+              </div>
               {project.id === 'taxation-map' && <span className="preview-caption">Tampilan versi sebelumnya</span>}
             </div>
             <div className="gallery-copy">
