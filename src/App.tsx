@@ -21,7 +21,11 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 function ProjectVisual({ project }: { project: Project }) {
   if (project.image) return <img src={project.image} alt={project.imageAlt} loading="lazy" width="1200" height="750" />;
   if (project.id === 'komplek-hari-bahagia') return <NeighborhoodPreview />;
-  if (project.id === 'pos-inventory') return <div className="pos-visual" aria-label="Ringkasan modul POS Inventory, bukan screenshot aplikasi"><span className="pos-brand">Rafly Helm</span><strong>Kasir dan stok<br />Rafly Helm.</strong><div className="pos-modules"><span>Kasir<Arrow /></span><span>Inventory<Arrow /></span></div><span className="pos-caption">Ringkasan modul aplikasi</span></div>;
+  if (project.id === 'pos-inventory') return <div className="gallery-receipt" aria-hidden="true">
+    <strong>Rafly Helm</strong><span>Struk penjualan</span>
+    <div><span>Produk</span><span>Jumlah</span></div>
+    <div><span>Subtotal</span><i /></div><div><b>Total</b><i /></div>
+  </div>;
   return <div className="revishit-visual" aria-label="Ringkasan alur aplikasi Revishit">
     <div className="rev-brand">revishit</div>
     <div className="flow-board"><span>Alur aplikasi</span><strong>Langkah berikutnya,<br />lebih terarah.</strong>
@@ -125,7 +129,7 @@ export default function App() {
         </div><div className="hero-transition" aria-hidden="true"><span>Yang pernah</span><span>kukerjakan.</span><p>Scroll untuk lihat proyek <Arrow /></p></div><HeroVisual motion={motion} />
         <div className="hero-footer"><span>Web development / Geospatial / Automation</span><a href="#projects">Scroll untuk menjelajah <span aria-hidden="true">↓</span></a></div>
       </section>
-      <ProjectGallery motion={motion} openProject={setSelectedProject} renderVisual={project => <ProjectVisual project={project} />} />
+      <ProjectGallery openProject={setSelectedProject} renderVisual={project => <ProjectVisual project={project} />} />
       <SkillsWorkbench openProject={setSelectedProject} />
       <AboutSection />
       <ContactSection />
