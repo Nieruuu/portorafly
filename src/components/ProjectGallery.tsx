@@ -19,6 +19,7 @@ interface GalleryProps {
 export function ProjectGallery({ motion, openProject, renderVisual }: GalleryProps) {
   const section = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
   const trigger = useRef<ScrollTrigger | null>(null);
   const [{ index, direction }, setSlide] = useState({ index: 0, direction: 'down' });
   const active = useRef(0);
@@ -34,13 +35,40 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
       ? new IntersectionObserver(([entry]) => viewport.toggleAttribute('data-onstage', entry.intersectionRatio >= 0.5), { threshold: 0.5 })
       : null;
     observer?.observe(viewport);
+    let requested = active.current;
+    let departure: Animation | null = null;
+    const showRequested = () => {
+      setSlide({ index: requested, direction: requested < active.current ? 'up' : 'down' });
+      active.current = requested;
+    };
     const sync = (scroll: ScrollTrigger) => {
       const position = scroll.progress * last;
-      const next = Math.round(position);
-      if (motion) viewport.style.setProperty('--slide-travel', ((position - next) * 2).toFixed(3));
-      if (next === active.current) return;
-      setSlide({ index: next, direction: next < active.current ? 'up' : 'down' });
-      active.current = next;
+      requested = Math.round(position);
+      if (motion) viewport.style.setProperty('--slide-travel', ((position - requested) * 2).toFixed(3));
+      if (requested === active.current) {
+        if (departure && departure.playbackRate > 0) departure.reverse();
+        return;
+      }
+      if (departure) {
+        if (departure.playbackRate < 0) departure.reverse();
+        return;
+      }
+      const card = panel.current;
+      if (!motion || !viewport.hasAttribute('data-onstage') || !card?.animate) {
+        showRequested();
+        return;
+      }
+      const side = requested > active.current ? -1 : 1;
+      departure = card.animate([
+        { transform: getComputedStyle(card).transform },
+        { transform: `perspective(1100px) translateY(${side * 5}%) rotateX(${-side * 5}deg) scale(.82)` },
+      ], { duration: 180, easing: 'cubic-bezier(.45,0,.8,.55)', fill: 'forwards' });
+      // Fast scrolling can cross another boundary before the old card leaves.
+      departure.onfinish = () => {
+        if (requested === active.current) departure?.cancel();
+        else showRequested();
+        departure = null;
+      };
     };
     const scroll = ScrollTrigger.create({
       trigger: track,
@@ -52,6 +80,7 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
     trigger.current = scroll;
     return () => {
       scroll.kill();
+      departure?.cancel();
       trigger.current = null;
       observer?.disconnect();
       viewport.removeAttribute('data-onstage');
@@ -79,7 +108,7 @@ export function ProjectGallery({ motion, openProject, renderVisual }: GalleryPro
             <button type="button" aria-label="Proyek berikutnya" aria-disabled={index === last} onClick={() => goTo(index + 1)}>↓</button>
           </div>
         </div>
-        <div className="gallery-panel" key={project.id}>
+        <div ref={panel} className="gallery-panel" key={project.id} data-direction={direction}>
           <article className="gallery-card" data-direction={direction}
             style={{ '--project-color': project.color } as CSSProperties}>
             <div className="gallery-preview">

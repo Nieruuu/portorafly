@@ -91,6 +91,18 @@
 }
 
 @media screen and (prefers-reduced-motion: no-preference) {
+  .gallery-stage[data-onstage] .gallery-panel {
+    --edge: max(var(--slide-travel, 0), calc(-1 * var(--slide-travel, 0)));
+    --retreat: clamp(0, calc((var(--edge) - .3) * 1.43), 1);
+    --arrival-side: 1;
+    scale: calc(1 - var(--retreat) * .075);
+    animation: card-landing .56s cubic-bezier(.16,.76,.25,1) backwards;
+  }
+  .gallery-stage[data-onstage] .gallery-panel[data-direction="up"] { --arrival-side: -1; }
+  @keyframes card-landing {
+    from { transform: perspective(1100px) translateY(calc(var(--arrival-side) * 6%)) rotateX(calc(var(--arrival-side) * -6deg)) scale(.8); }
+    to { transform: perspective(1100px) translateY(0) rotateX(0deg) scale(1); }
+  }
   .gallery-card { --entry-side: 1; --settle: cubic-bezier(.18,.76,.22,1); }
   .gallery-card[data-direction="up"] { --entry-side: -1; }
   .gallery-preview::before { translate: 0 calc(var(--slide-travel, 0) * 12px); }
