@@ -20,5 +20,5 @@ export const site = {
     { label: 'GitHub', url: 'https://github.com/Nieruuu', iconPath: siGithub.path },
     { label: 'WhatsApp', url: 'https://wa.me/6289512263027', iconPath: siWhatsapp.path },
   ],
-  navigation: [{ label: 'Proyek', id: 'projects' }, { label: 'Keahlian', id: 'skills' }, { label: 'Profil', id: 'about' }, { label: 'Kontak', id: 'contact' }],
+  navigation: [{ label: 'Profil', id: 'about' }, { label: 'Proyek', id: 'projects' }, { label: 'Keahlian', id: 'skills' }, { label: 'Kontak', id: 'contact' }],
 };

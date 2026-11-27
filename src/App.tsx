@@ -78,6 +78,14 @@ export default function App() {
       gsap.from('.hero-copy > *', { y: 18, opacity: 0, stagger: 0.09, duration: 0.7, ease: 'power2.out' });
       gsap.to('.scroll-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom bottom', scrub: true } });
       gsap.from('.workbench', { y: 38, rotation: 1.5, duration: 0.9, ease: 'power2.out', scrollTrigger: { trigger: '#skills', start: 'top 72%', once: true } });
+      gsap.from('.profile-intro > *, .profile-story > p, .profile-experience-heading', {
+        y: 28, opacity: 0, stagger: 0.09, duration: 0.75, ease: 'power2.out',
+        scrollTrigger: { trigger: '#about', start: 'top 72%', once: true },
+      });
+      gsap.from('.profile-timeline article', {
+        y: 30, opacity: 0, stagger: 0.16, duration: 0.7, ease: 'power2.out',
+        scrollTrigger: { trigger: '.profile-timeline', start: 'top 78%', once: true },
+      });
       gsap.fromTo('.profile-monogram', { y: 22, rotation: -9 }, { y: -28, rotation: 3, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
       gsap.fromTo('.profile-sticker', { y: 15, rotation: 12 }, { y: -38, rotation: -4, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
       gsap.from('.contact-stamp', { rotation: -35, scale: 0.8, ease: 'none',
@@ -132,7 +140,7 @@ export default function App() {
             ))}
           </nav>
           <div className="hero-actions">
-            <a className="button primary" href="#projects">Lihat proyek <Arrow /></a>
+            <a className="button primary" href="#about">Kenali saya <Arrow /></a>
             <a className="button cv-download" href={cvUrl} download="CV-Rafly-Sugiarto.pdf">
               Unduh CV
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
@@ -142,12 +150,12 @@ export default function App() {
             <a className="text-link" href={`mailto:${site.email}`}>Kirim email <Arrow diagonal /></a>
           </div>
           <p className="hero-role">{site.role}</p>
-        </div><div className="hero-transition" aria-hidden="true"><span>Proyek</span><span>pilihan saya</span><p>Gulir untuk melihat proyek <Arrow /></p></div><HeroVisual motion={motion} />
-        <div className="hero-footer"><span>Pengembangan web / Geospasial / DevOps</span><a href="#projects">Jelajahi proyek <span aria-hidden="true">↓</span></a></div>
+        </div><div className="hero-transition" aria-hidden="true"><span>Tentang</span><span>saya</span><p>Gulir untuk mengenal saya <Arrow /></p></div><HeroVisual motion={motion} />
+        <div className="hero-footer"><span>Pengembangan web / Geospasial / DevOps</span><a href="#about">Kenali Rafly <span aria-hidden="true">↓</span></a></div>
       </section>
+      <AboutSection />
       <ProjectGallery motion={motion} openProject={setSelectedProject} renderVisual={project => <ProjectVisual project={project} />} />
       <SkillsWorkbench openProject={setSelectedProject} />
-      <AboutSection />
       <ContactSection />
     </main>
     <footer className="site-footer wrap"><a className="wordmark" href="#hero">rafly<span className="wordmark-dot">.</span></a><span>© {new Date().getFullYear()} {site.name}</span><a href="#hero">Kembali ke atas ↑</a></footer>
