@@ -8,7 +8,7 @@ export const site = {
   approach: 'Di bidang DevOps, saya ingin mengurangi langkah manual saat merilis aplikasi. Selama magang di Cartenz, saya menggunakan Python dan Docker untuk mengotomatiskan proses deployment. Pada proyek mandiri, saya juga menggunakan GitHub Actions untuk menjalankan alur CI/CD.',
   contactTitle: 'Hubungi saya',
   contactDescription: 'Untuk membahas proyek, peluang kerja, atau kolaborasi di bidang pengembangan web dan DevOps, silakan hubungi saya melalui email atau LinkedIn.',
-  skillsHeading: ['Teknologi yang', 'saya gunakan'],
+  skillsHeading: ['Tools dan framework yang', 'saya gunakan'],
   aboutHeading: ['Tentang saya'],
   focusAreas: ['Aplikasi web', 'Peta interaktif', 'Otomatisasi deployment'],
   email: 'rafly23yoi@gmail.com',
